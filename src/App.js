@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import Main from './pages/Main/Main.jsx'
+import Intro from './pages/Intro/Intro.jsx'
+import LoginBac from './pages/LoginBac/LoginBac.jsx'
+import FormPatient from './pages/FormPatient/FormPatient.jsx'
+import Table from './pages/Table/Table.jsx'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+{/* <LoginBac patient={patient} ></LoginBac> */}
+{/* <FormPatient></FormPatient> */}
 function App() {
+  let patient=false;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Table></Table>
   );
 }
 
