@@ -1,8 +1,8 @@
 import { Row, Container,Navbar,Nav,NavDropdown,Form,FormControl,Button } from "react-bootstrap";
-import './Main.css'
+import './Main.scss'
 import { useState } from "react";
 import  MyCard  from "../../components/Card/MyCard.jsx";
-//import  Header  from "../../components/Header/Header.jsx";
+import  Header  from "../../components/Header/Header.jsx";
 
 function Main() {
     const [menuAbierto, setMenuAbierto] = useState(false);
@@ -13,7 +13,7 @@ function Main() {
         <div className='main-page-container'>
         {/* <Header menuClickedFunction={toggleMenuLateral}></Header> */}
         
-        {/* <Header></Header> */}
+         <Header></Header>
         
         <Container  className="vertical-center">  
 
@@ -30,7 +30,7 @@ function Main() {
                    <MyCard
                         header="Listado" 
                         link="/img/pacientes.jpg" 
-                        title="Listdo de pacientes"
+                        title="Listado de pacientes"
                         text="Consulta la información de todos los pacientes registrados en el sistema"
                         msgBtn="Consultar"
                         >

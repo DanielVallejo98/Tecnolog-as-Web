@@ -1,6 +1,6 @@
 import React from 'react'
 import { Carousel,Container,Navbar,Nav,NavDropdown,Form } from "react-bootstrap";
-import './Intro.css'
+import './Intro.scss'
 import Footer from '../../components/Footer/Footer.jsx'
 
 function Intro() {

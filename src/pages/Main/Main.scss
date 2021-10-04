@@ -2,11 +2,12 @@
   margin: 0;
   background: linear-gradient(-45deg, #cdf3f5, #ffffff, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-  height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+  animation: gradient 15s ease;
+
+  animation-fill-mode: forwards;
+  animation-iteration-count: 2;
+  height: 100%;
+
   font-weight: 400;
   line-height: 1.5;
 }
@@ -37,7 +38,7 @@
 }
 .my-card:before {
   background-color: transparent;
-  backdrop-filter: blur(50px) saturate(100%) contrast(90%) brightness(130%);
+  backdrop-filter: blur(30px) saturate(40%) contrast(80%) brightness(130%);
   content: "";
   height: 100%;
   position: absolute;

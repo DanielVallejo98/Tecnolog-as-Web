@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Button, Col } from "react-bootstrap";
-import "./MyCard.css"
+import "./MyCard.scss"
 function MyCard(props) {
     return (
         <Col sm={12} md={6} lg={3} className="margin-bottom ">
