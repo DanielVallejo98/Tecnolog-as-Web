@@ -53,10 +53,10 @@ function Main() {
                         >
                     </MyCard>
                    <MyCard
-                        header="Estadísticas" 
+                        header="Consulta CC" 
                         link="/img/cc2.jpg" 
-                        title="Estadísticas del control de calidad"
-                        text="Revisa medidas estadísticas como media, varianza, etc."
+                        title="Consulta de los controles de calidad"
+                        text="Consulta controles de calidad y revisa medidas estadísticas como media, varianza, etc."
                         msgBtn="Consultar"
                         route="/controlcalidad"
                         >

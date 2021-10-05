@@ -22,7 +22,7 @@ function FormPatient() {
       <>
     {/* <Header></Header> */}
     <div className="location">
-        <BackButton></BackButton>
+        <BackButton route="/main"></BackButton>
         <div className="title">
             <h1 style={{fontWeight:'800',margin:'0'}} >Perfil lipídico</h1>
             <h6 style={{textAlign:'end',color:'#fff'}} className="mb-3 subtitle">Sistema LIS.</h6>
