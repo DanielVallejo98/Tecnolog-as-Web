@@ -1,8 +1,7 @@
 import React from 'react'
 import MaterialTable from '@material-table/core';
 import  BackButton  from "../../components/BackButton/BackButton.jsx";
-import {OverlayTrigger,Button} from "react-bootstrap";
-
+import { useHistory } from "react-router-dom";
 import './Table.scss'
 
 const columnasPacientes=[
@@ -221,10 +220,11 @@ const datosControl=[
     
 ]
 function Table({control}) {
+    const history = useHistory()
     return (
         <div className="table-container">
             <div className="top-table pb-3" >
-                <BackButton></BackButton>
+                <BackButton route="/main"></BackButton>
                 <div style={{width:'80%',textAlign:'center',display:'flex',flexDirection:"column",justifyContent:'center',alignItems:'center'}}>
                 <h2 style={{color:'rgb(50 48 48 / 87%)',fontWeight:'700'}}>Sistema LIS</h2>
                 </div>
@@ -245,7 +245,11 @@ function Table({control}) {
                         {
                             icon: 'add',
                             tooltip:'Mira información estadística del control de calidad para esta fecha',
-                            onClick:(event,rowData)=>  {"<div>Popover content</div>"}
+                            onClick:(event,rowData)=>  {
+                                
+                                history.push("/estadisticaspordia/1")
+                            
+                            }
                             
                         },
                         {
@@ -256,8 +260,8 @@ function Table({control}) {
 
                         {
                             icon: 'delete',
-                            tooltip:'Elimnar paciente del sistema',
-                            onClick:(event,rowData)=>window.confirm("elimnar paciente del sistema")
+                            tooltip:'Eliminar paciente del sistema',
+                            onClick:(event,rowData)=>window.confirm("eliminar paciente del sistema")
                         },
                     ]
                 }
@@ -289,7 +293,7 @@ function Table({control}) {
                         {
                             icon: 'add',
                             tooltip:'Agrega una cita el paciente',
-                            onClick:(event,rowData)=>alert("has presionado el paciente con ombre: "+rowData.nombre)
+                            onClick:(event,rowData)=>{history.push("/cita/1")}
                         },
                         {
                             icon: 'edit',
@@ -299,12 +303,12 @@ function Table({control}) {
                         {
                             icon: 'search',
                             tooltip:'Ver más información del paciente',
-                            onClick:(event,rowData)=>alert("ver historial paciente citas")
+                            onClick:(event,rowData)=>{ history.push("/resultspatient/1")}
                         },
                         {
                             icon: 'delete',
-                            tooltip:'Elimnar paciente del sistema',
-                            onClick:(event,rowData)=>window.confirm("elimnar paciente del sistema")
+                            tooltip:'Eliminar paciente del sistema',
+                            onClick:(event,rowData)=>window.confirm("eliminar paciente del sistema")
                         },
                     ]
                 }

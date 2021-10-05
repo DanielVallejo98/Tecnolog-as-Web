@@ -1,6 +1,7 @@
 import React from 'react'
-import { Card, Button, Col } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import "./MyCard.scss"
+import {Link} from "react-router-dom"
 function MyCard(props) {
     return (
         <Col sm={12} md={6} lg={3} className="margin-bottom ">
@@ -16,9 +17,9 @@ function MyCard(props) {
                     </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <Button className="justify-content-end">
+                        <Link className="justify-content-end button" to={props.route}>
                             {props.msgBtn}
-                        </Button>
+                        </Link>
                     </Card.Footer>
                 </div>
 

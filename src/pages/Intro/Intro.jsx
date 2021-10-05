@@ -1,14 +1,14 @@
 import React from 'react'
-import { Carousel,Container,Navbar,Nav,NavDropdown,Form } from "react-bootstrap";
+import { Carousel,Navbar,Nav,NavDropdown,Form } from "react-bootstrap";
 import './Intro.scss'
 import Footer from '../../components/Footer/Footer.jsx'
-
+import {Link} from "react-router-dom";
 function Intro() {
     return (
         <>
         <header style={{backgroundColor:'#85DCFF'}}>
             <Navbar bg="transparent" expand="lg">
-            <Navbar.Brand href="/"  ><i class="fas fa-vial fa-2x" style={{color:'rgba(255,255,255,1)'}}></i><h2 className="pl-3" style={{display:'inline-block',fontWeight:'600'}}>Sistema LIS</h2></Navbar.Brand>
+            <Navbar.Brand href="/"  ><i className="fas fa-vial fa-2x" style={{color:'rgba(255,255,255,1)'}}></i><h2 className="pl-3" style={{display:'inline-block',fontWeight:'600'}}>Sistema LIS</h2></Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
                 <Nav
@@ -26,14 +26,8 @@ function Intro() {
                 </Nav>
                 <Form className="d-flex">
                 <Nav>
-                    <Nav.Link href="#action1">
-                            Iniciar Sesión
-                        </Nav.Link>
-                    <Nav.Link href="#action2">
-                        
-                        Consulta Resultados
-                        
-                    </Nav.Link>
+                    <Link to="/loginbac" className="m-1">Iniciar Sesión</Link>
+                    <Link to="/loginpatient" className="m-1"> Consulta Resultados</Link>
                 </Nav>            
                 </Form>
             </Navbar.Collapse>

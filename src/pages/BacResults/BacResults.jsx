@@ -1,28 +1,17 @@
 import React from 'react'
-import { Container,Button } from 'react-bootstrap'
-import './PatientResults.scss'
-
+import { Container } from 'react-bootstrap'
+import './BacResults.scss'
+import  BackButton  from "../../components/BackButton/BackButton.jsx";
 import  Patient  from "../../components/Patient/Patient.jsx";
-import { useContext } from "react";
-import { PatientContext } from "../../contexts/PatientContext.jsx";
-import { useHistory } from "react-router-dom";
 
-function PatientResults() {
-    const { setPatientLog } = useContext(PatientContext);
-    const history = useHistory();
 
-    const LogOut = () => {
-        setPatientLog({ isLoggedIn: false });
-        localStorage.removeItem("paciente");
-        history.push("/")
-    };
+function BacResults() {
+
     return (
         <div className="location">
-            <div style={{width:'100%', display:'flex',justifyContent:'end'}}>
-
+            <div style={{width:'100%', display:'flex',justifyContent:'space-between'}}>
+                <BackButton route="/pacientes"></BackButton>
  
-                        <Button variant="outline-danger" onClick={() => LogOut()}><i className="fas fa-sign-out-alt fa-lg "></i></Button>
-  
             </div>
             <div className="title">
                 <h1 style={{fontWeight:'800',margin:'0'}} >Resultados</h1>
@@ -44,14 +33,17 @@ function PatientResults() {
                     </div>
 
                 </div>
+  
+                        <Patient></Patient>
+                        <Patient></Patient>
+                        <Patient></Patient>
+                        <Patient></Patient>
 
-                    <Patient></Patient>
- 
-                
+
                 
             </Container>
         </div>
     )
 }
 
-export default PatientResults
+export default BacResults

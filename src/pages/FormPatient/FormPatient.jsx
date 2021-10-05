@@ -2,6 +2,7 @@ import React from 'react'
 import './FormPatient.scss'
 import {Form,Button,Row,Col} from "react-bootstrap";
 import { useState } from "react";
+import {Link} from "react-router-dom"
 
 import  BackButton  from "../../components/BackButton/BackButton.jsx";
 function FormPatient() {
@@ -161,7 +162,7 @@ function FormPatient() {
             </Row>
             </div>
         
-        <h6 className="mt-3">Recuerda que si el paciente ya existía en la base datos, mejor dirígete <span>aquí</span> para guardar su nueva cita.</h6>
+        <h6 className="mt-3">Recuerda que si el paciente ya existía en la base datos, mejor dirígete <Link to="/pacientes">aquí</Link> para guardar su nueva cita.</h6>
         <Button type="submit" className="mt-3" style={{display:'block',textAlign:'center',width:'100%'}}>Guardar registro</Button>
         </Form>
     </div>

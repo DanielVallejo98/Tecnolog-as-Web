@@ -16,7 +16,7 @@ function ControlCalidad() {
     return (
         <div className="location">
         <div style={{display:'flex',width:'100%'}}>
-            <BackButton></BackButton>
+            <BackButton route="/main"></BackButton>
             <div style={{display:'flex',flexDirection:'column',color:'#fff'}}>
                 <h6 style={{fontWeight:'400', textAlign:'center'}}>Tiempo en que se guardará el registro del control:</h6>
                 <p style={{textAlign:'center'}}> Hora : {date.toLocaleTimeString()} y Fecha : {date.toLocaleDateString()}</p>

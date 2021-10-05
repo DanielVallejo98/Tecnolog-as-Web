@@ -1,10 +1,10 @@
 import React from 'react'
-import {Navbar,Nav,NavDropdown,Form,FormControl,Button } from "react-bootstrap";
+import {Navbar,Nav,Form,Button } from "react-bootstrap";
 
-function Header() {
+function Header({loggedOut}) {
     return (
         <Navbar bg="transparent" expand="lg">
-        <Navbar.Brand href="#" style={{color:'black'}}><strong>Sistema LIS</strong> </Navbar.Brand>
+        <Navbar.Brand href="/main" style={{color:'black'}}><strong>Sistema LIS</strong> </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -12,15 +12,15 @@ function Header() {
             style={{ maxHeight: '100px' }}
             navbarScroll
             >
-            <Nav.Link href="#action1">Ingresar nuevo paciente</Nav.Link>
-            <Nav.Link href="#action2">Ver pacientes</Nav.Link>
+            <Nav.Link href="/nuevopaciente">Ingresar nuevo paciente</Nav.Link>
+            <Nav.Link href="/pacientes">Ver pacientes</Nav.Link>
 
-            <Nav.Link href="#" >CC</Nav.Link>
-            <Nav.Link href="#" >Estadísticas</Nav.Link>
+            <Nav.Link href="/controlcalidad" >CC</Nav.Link>
+            <Nav.Link href="/estadisticas" >Estadísticas</Nav.Link>
             </Nav>
-            <Form className="d-flex">
+            <Form className="d-flex" onSubmit={loggedOut}>
             
-            <Button variant="outline-danger"><i className="fas fa-sign-out-alt fa-lg "></i></Button>
+            <Button variant="outline-danger" type="submit"><i className="fas fa-sign-out-alt fa-lg "></i></Button>
             </Form>
         </Navbar.Collapse>
         </Navbar>

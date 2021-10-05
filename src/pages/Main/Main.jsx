@@ -1,19 +1,25 @@
-import { Row, Container,Navbar,Nav,NavDropdown,Form,FormControl,Button } from "react-bootstrap";
+import { Row, Container } from "react-bootstrap";
 import './Main.scss'
-import { useState } from "react";
+
 import  MyCard  from "../../components/Card/MyCard.jsx";
 import  Header  from "../../components/Header/Header.jsx";
-
+import { useContext } from "react";
+import { BacContext } from "../../contexts/BacContext.jsx";
+import { useHistory } from "react-router-dom";
 function Main() {
-    const [menuAbierto, setMenuAbierto] = useState(false);
-    const toggleMenuLateral = () => {
-        setMenuAbierto(!menuAbierto);
-      };
+    const { setBacLog } = useContext(BacContext);
+    const history = useHistory();
+
+    const LogOutBac = () => {
+        setBacLog({ isLoggedIn: false });
+        localStorage.removeItem("bac");
+        history.push("/")
+    };
     return (
         <div className='main-page-container'>
         {/* <Header menuClickedFunction={toggleMenuLateral}></Header> */}
         
-         <Header></Header>
+         <Header loggedOut={LogOutBac}></Header>
         
         <Container  className="vertical-center">  
 
@@ -25,6 +31,7 @@ function Main() {
                         title="Ingresar nuevo paciente"
                         text="Ingresa los datos personales de un paciente y su perfíl lipídico"
                         msgBtn="Nuevo"
+                        route="/nuevopaciente"
                         >
                     </MyCard>
                    <MyCard
@@ -33,6 +40,7 @@ function Main() {
                         title="Listado de pacientes"
                         text="Consulta la información de todos los pacientes registrados en el sistema"
                         msgBtn="Consultar"
+                        route="/pacientes"
                         >
                     </MyCard>
                    <MyCard
@@ -41,6 +49,7 @@ function Main() {
                         title="Control de calidad 1 Y 2"
                         text="Realiza un control de calidad de nivel 1 y 2 del dispositivo"
                         msgBtn="Realizar"
+                        route="/nuevocontrolcalidad"
                         >
                     </MyCard>
                    <MyCard
@@ -48,7 +57,8 @@ function Main() {
                         link="/img/cc2.jpg" 
                         title="Estadísticas del control de calidad"
                         text="Revisa medidas estadísticas como media, varianza, etc."
-                        msgBtn="Realizar"
+                        msgBtn="Consultar"
+                        route="/controlcalidad"
                         >
                     </MyCard>
 
