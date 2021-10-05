@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/://DanielVallejo98.github.io/Tecnologias-Web/static/css/main.77194e0c.chunk.css",
-    "main.js": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/main.8337ae47.chunk.js",
-    "main.js.map": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/main.8337ae47.chunk.js.map",
-    "runtime-main.js": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/runtime-main.a33f21ad.js",
-    "runtime-main.js.map": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/runtime-main.a33f21ad.js.map",
-    "static/js/2.e2f16be3.chunk.js": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/2.e2f16be3.chunk.js",
-    "static/js/2.e2f16be3.chunk.js.map": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/2.e2f16be3.chunk.js.map",
-    "static/js/3.e4cef863.chunk.js": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/3.e4cef863.chunk.js",
-    "static/js/3.e4cef863.chunk.js.map": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/3.e4cef863.chunk.js.map",
-    "index.html": "/://DanielVallejo98.github.io/Tecnologias-Web/index.html",
-    "static/css/main.77194e0c.chunk.css.map": "/://DanielVallejo98.github.io/Tecnologias-Web/static/css/main.77194e0c.chunk.css.map",
-    "static/js/2.e2f16be3.chunk.js.LICENSE.txt": "/://DanielVallejo98.github.io/Tecnologias-Web/static/js/2.e2f16be3.chunk.js.LICENSE.txt"
+    "main.css": "/Tecnologias-Web/static/css/main.333aa8b5.chunk.css",
+    "main.js": "/Tecnologias-Web/static/js/main.8337ae47.chunk.js",
+    "main.js.map": "/Tecnologias-Web/static/js/main.8337ae47.chunk.js.map",
+    "runtime-main.js": "/Tecnologias-Web/static/js/runtime-main.97fb0161.js",
+    "runtime-main.js.map": "/Tecnologias-Web/static/js/runtime-main.97fb0161.js.map",
+    "static/js/2.e2f16be3.chunk.js": "/Tecnologias-Web/static/js/2.e2f16be3.chunk.js",
+    "static/js/2.e2f16be3.chunk.js.map": "/Tecnologias-Web/static/js/2.e2f16be3.chunk.js.map",
+    "static/js/3.e4cef863.chunk.js": "/Tecnologias-Web/static/js/3.e4cef863.chunk.js",
+    "static/js/3.e4cef863.chunk.js.map": "/Tecnologias-Web/static/js/3.e4cef863.chunk.js.map",
+    "index.html": "/Tecnologias-Web/index.html",
+    "static/css/main.333aa8b5.chunk.css.map": "/Tecnologias-Web/static/css/main.333aa8b5.chunk.css.map",
+    "static/js/2.e2f16be3.chunk.js.LICENSE.txt": "/Tecnologias-Web/static/js/2.e2f16be3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a33f21ad.js",
+    "static/js/runtime-main.97fb0161.js",
     "static/js/2.e2f16be3.chunk.js",
-    "static/css/main.77194e0c.chunk.css",
+    "static/css/main.333aa8b5.chunk.css",
     "static/js/main.8337ae47.chunk.js"
   ]
 }
