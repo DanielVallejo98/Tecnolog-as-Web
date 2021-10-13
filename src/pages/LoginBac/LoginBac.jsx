@@ -4,21 +4,28 @@ import {Form,Button, Container } from "react-bootstrap";
 import { useContext, useState } from "react";
 import { BacContext } from "../../contexts/BacContext.jsx";
 import { useHistory } from "react-router-dom";
+import configData from "../../config.json";
+import Alert from 'react-bootstrap/Alert'
 
-async function loginBac(contraseña) {
+
+
+  function loginBac(data) {
+      const {_id,nombre,documento}=data
     return {
-      ID:1,  
-      NOMBRE: "Antonio Morales",
-      TOKEN:"12345"
+      ID:_id.$oid,  
+      NOMBRE: nombre,
+      DOCUMENTO:documento
     };
   }
 
 function LoginBac() {
+    const [show, setShow] = useState(false);
+
     const date = new Date().getFullYear();
     const history = useHistory();
     
     const { setBacLog } = useContext(BacContext);
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
 
@@ -27,21 +34,44 @@ function LoginBac() {
  
   const handleSubmitBac = async (e) => {
     e.preventDefault();
-
-    const bacInfo = await loginBac({
-      username,
-      password
-    });
-    bacInfo.isLoggedIn = true;
-
-    console.log(bacInfo);
-    setBacLog(bacInfo);
-    localStorage.setItem("bac", JSON.stringify(bacInfo));
-    history.push(`/main`);
+    const opts ={
+        method:'POST',
+        body:JSON.stringify({
+            email:email,
+            password:password
+        }),
+        headers:{
+            'Content-Type': 'application/json'
+          }
+    }
+    fetch(`${configData.SERVER_URL}/loginbac`,opts)
+        .then((response) => response.json())
+        .then((data) => {
+            //console.log(token)
+            if(data["msg"]==="nodata"){
+                setShow(true)
+                
+                setEmail("")
+                setPassword("")
+                //alert("No existe ese documento en el sistema!")
+            }else{
+                const bacInfo = loginBac(data);
+                  bacInfo.isLoggedIn = true;
+              
+                  //console.log(patientInfo);
+                  setBacLog(bacInfo);
+                  localStorage.setItem("bac", JSON.stringify(bacInfo));
+                  history.push(`/main/${bacInfo.ID}`);
+            }
+        });
   };
     return (
         
         <div className="login-bac-container">
+        <Alert variant="danger" onClose={() => setShow(false)} dismissible show={show} >
+            <Alert.Heading>No existe este usuario!</Alert.Heading>
+                  <p>Verifica que hayas ingresado tu correo y contraseña adecuadamente.</p>
+        </Alert>
             <Container className="vertical-center">
 
                             <div id="container-beaker">
@@ -77,14 +107,14 @@ function LoginBac() {
 
                             <Form.Group className="mb-3" controlId="formBasicEmail" >
                                 <Form.Label>Correo electrónico</Form.Label>
-                                <Form.Control type="email" placeholder="Ingresa tu correo" onChange={(e) => setUsername(e.target.value)}/>
+                                <Form.Control type="email" placeholder="Ingresa tu correo" onChange={(e) => setEmail(e.target.value)} className="borrar" value={email}/>
                                 <Form.Text className="text-muted">
                                 No compartiremos tu cuenta con nadie.
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Contraseña</Form.Label>
-                                <Form.Control type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)}/>
+                                <Form.Control type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} className="borrar" value={password}/>
                             </Form.Group>
                             <Button variant="primary" type="submit" style={{display:'block',width:'100%'}}>
                                 Ingresar

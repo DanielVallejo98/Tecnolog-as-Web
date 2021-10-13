@@ -3,26 +3,104 @@ import './FormPatient.scss'
 import {Form,Button,Row,Col} from "react-bootstrap";
 import { useState } from "react";
 import {Link} from "react-router-dom"
-
+import { useReducer } from "react";
+import configData from "../../config.json";
 import  BackButton  from "../../components/BackButton/BackButton.jsx";
+import { useContext } from "react";
+import { BacContext } from "../../contexts/BacContext.jsx";
+import { useHistory } from "react-router-dom";
+
 function FormPatient() {
     const [validated, setValidated] = useState(false);
+    const { bacLog } = useContext(BacContext);
+    const history = useHistory();
 
-  const handleSubmit = (event) => {
+    function checkProperties(obj) {
+        let array=[]
+        for (var key in obj) {
+            if (obj[key] === null || obj[key] === "")
+                array.push(0);
+        }
+        if(array[0]===0)
+            return true;
+        else{
+            return false
+        }
+    }
+    const crearPaciente = async (datos) => {
+
+        const opts ={
+            method:'POST',
+            body:JSON.stringify(
+                datos
+            ),
+            headers:{
+                'Content-Type': 'application/json'
+              }
+        }
+        fetch(`${configData.SERVER_URL}/crearpaciente`,opts)
+            .then((response) => response.json())
+            .then((data) => {
+            
+                alert(data["message"])
+ 
+            }
+                );
+      };
+
+  const handleSubmit = async (event)  => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      
     }
-
     setValidated(true);
+    let notempty=checkProperties(formData)
+    if(!notempty) await crearPaciente(formData)
+    
+   
+  };
+  const formReducer = (state, data) => {
+    if (data.isEvent) {
+      return {
+        ...state,
+        [data.name]: data.value,
+      };
+    }
+    return {
+      ...data,
+    };
+  };
+
+  const [formData, setFormData] = useReducer(formReducer, {
+    nombre: "",
+    eps: "",
+    genero: "",
+    fecha_nacimiento: "",
+    documento: "",
+    colesterol_total: "",
+    trigliceridos:"",
+    ldl:"",
+    hdl:""
+  
+ 
+    
+  });
+
+  const handleChange = (event) => {
+    setFormData({
+      name: event.target.name,
+      value: event.target.value,
+      isEvent: true,
+    });
   };
 
   return (
       <>
     {/* <Header></Header> */}
     <div className="location">
-        <BackButton route="/main"></BackButton>
+        <BackButton route={`/main/${bacLog.ID}`}></BackButton>
         <div className="title">
             <h1 style={{fontWeight:'800',margin:'0'}} >Perfil lipídico</h1>
             <h6 style={{textAlign:'end',color:'#fff'}} className="mb-3 subtitle">Sistema LIS.</h6>
@@ -35,7 +113,8 @@ function FormPatient() {
                 required
                 type="text"
                 placeholder="Nombre completo"
-
+                name="nombre"
+                onChange={handleChange}
             />
             <Form.Control.Feedback type="valid">
                 Completado!
@@ -50,6 +129,8 @@ function FormPatient() {
                 required
                 type="number"
                 placeholder="D.I"
+                name="documento"
+                onChange={handleChange}
             />
             <Form.Control.Feedback type="valid">
                 Completado!
@@ -60,7 +141,7 @@ function FormPatient() {
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="EPS">
             <Form.Label>Selecciona la EPS del paciente</Form.Label>
-                <Form.Control as="select" type="select" md="4" required>
+                <Form.Control as="select" type="select" md="4" required name="eps" onChange={handleChange}>
 
                     <option value="">Selecciona EPS</option>
                     <option value="sanitas">Sanitas</option>
@@ -74,7 +155,7 @@ function FormPatient() {
         <Row className="mb-3">
             <Form.Group as={Col} md="6" controlId="GENERO">
             <Form.Label>Selecciona el género del paciente</Form.Label>
-                <Form.Control as="select"  type="select" md="4" required>
+                <Form.Control as="select"  type="select" md="4" required name="genero" onChange={handleChange}>
 
                     <option value="">Género</option>
                     <option value="masculino">Masculino</option>
@@ -86,7 +167,7 @@ function FormPatient() {
         
             <Form.Group as={Col} md="6" controlId="validationCustom03">
             <Form.Label>Fecha de nacimiento</Form.Label>
-            <Form.Control type="date" placeholder="Fecha de nacimiento" required />
+            <Form.Control type="date" placeholder="Fecha de nacimiento" required name="fecha_nacimiento" onChange={handleChange}/>
             <Form.Control.Feedback type="valid">
                         Completado!
                     </Form.Control.Feedback>
@@ -99,13 +180,14 @@ function FormPatient() {
         
         <div className="pruebas">  
         <Row className="mb-3">
-        <Form.Group as={Col} md="6" controlId="COLESTEROLTOTAL">
+        <Form.Group as={Col} md="6" controlId="COLESTEROLTOTAL" >
             <Form.Label>Colesterol total mg/dL</Form.Label>
             <Form.Control
                 required
                 type="number"
                 placeholder="1 mg/dL"
-
+                name="colesterol_total"
+                onChange={handleChange}
             />
             <Form.Control.Feedback type="valid">
                 Completado!
@@ -120,6 +202,8 @@ function FormPatient() {
                 required
                 type="number"
                 placeholder="1 mg/dL"
+                name="trigliceridos"
+                onChange={handleChange}
             />
             <Form.Control.Feedback type="valid">
                 Completado!
@@ -136,7 +220,8 @@ function FormPatient() {
                 required
                 type="number"
                 placeholder="1 mg/dL"
-
+                name="hdl"
+                onChange={handleChange}
             />
             <Form.Control.Feedback type="valid">
                 Completado!
@@ -151,6 +236,8 @@ function FormPatient() {
                 required
                 type="number"
                 placeholder="1 mg/dL"
+                name="ldl"
+                onChange={handleChange}
             />
             <Form.Control.Feedback type="valid">
                 Completado!

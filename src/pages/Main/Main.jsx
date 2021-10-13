@@ -1,6 +1,5 @@
 import { Row, Container } from "react-bootstrap";
 import './Main.scss'
-
 import  MyCard  from "../../components/Card/MyCard.jsx";
 import  Header  from "../../components/Header/Header.jsx";
 import { useContext } from "react";
@@ -19,7 +18,7 @@ function Main() {
         <div className='main-page-container'>
         {/* <Header menuClickedFunction={toggleMenuLateral}></Header> */}
         
-         <Header loggedOut={LogOutBac}></Header>
+         <Header  loggedOut={LogOutBac}></Header>
         
         <Container  className="vertical-center">  
 
@@ -43,7 +42,7 @@ function Main() {
                         route="/pacientes"
                         >
                     </MyCard>
-                   <MyCard
+                   {/* <MyCard
                         header="CC" 
                         link="/img/cc1.jpg" 
                         title="Control de calidad 1 Y 2"
@@ -60,7 +59,7 @@ function Main() {
                         msgBtn="Consultar"
                         route="/controlcalidad"
                         >
-                    </MyCard>
+                    </MyCard> */}
 
             </Row>
         </Container>

@@ -3,21 +3,14 @@ import MaterialTable from '@material-table/core';
 import  BackButton  from "../../components/BackButton/BackButton.jsx";
 import { useHistory } from "react-router-dom";
 import './Table.scss'
+import configData from "../../config.json";
+import  {useEffect}  from "react";
+import  {useState}  from "react";
+import { useContext } from "react";
+import { BacContext } from "../../contexts/BacContext.jsx";
 
 const columnasPacientes=[
-    {
-        title:'ID',
-        field:'id',
-        type:'numeric',
-        cellStyle: {
-            textAlign: "center"
-        },
-        headerStyle:{
-            textAlign: "center"
-            
-        }
-
-    },
+    
     {
         title:'Nombre',
         field:'nombre',
@@ -33,7 +26,6 @@ const columnasPacientes=[
     {
         title:'Documento',
         field:'documento',
-        type:'numeric',
         cellStyle: {
             textAlign: "center"
         },
@@ -55,24 +47,20 @@ const columnasPacientes=[
         }
 
     },
+    {
+        title:'Género',
+        field:'genero',
+        cellStyle: {
+            textAlign: "center"
+        },
+        headerStyle:{
+            textAlign: "center"
+            
+        }
+
+    },
 ]
-const datosPacientes=[
-    {id:1,nombre:'Daniel1 Vallejo Ortega',documento:12456715, eps:'Sanitas'},
-    {id:2,nombre:'Daniel2 Vallejo Ortega',documento:12456714, eps:'Sanitas'},
-    {id:3,nombre:'Daniel3 Vallejo Ortega',documento:12456713, eps:'Sanitas'},
-    {id:4,nombre:'Daniel4 Vallejo Ortega',documento:12456712, eps:'Sanitas'},
-    {id:5,nombre:'Daniel5 Vallejo Ortega',documento:12456711, eps:'Sanitas'},
-    {id:6,nombre:'Daniel6 Vallejo Ortega',documento:12456710, eps:'Sanitas'},
-    {id:7,nombre:'Daniel7 Vallejo Ortega',documento:1245679, eps:'Sanitas'},
-    {id:8,nombre:'Daniel8 Vallejo Ortega',documento:1245678, eps:'Sanitas'},
-    {id:9,nombre:'Daniel9 Vallejo Ortega',documento:1245677, eps:'Sanitas'},
-    {id:10,nombre:'Daniel10 Vallejo Ortega',documento:1245676, eps:'Sanitas'},
-    {id:11,nombre:'Daniel11 Vallejo Ortega',documento:1245675, eps:'Sanitas'},
-    {id:12,nombre:'Daniel12 Vallejo Ortega',documento:1245674, eps:'Sanitas'},
-    {id:13,nombre:'Daniel13 Vallejo Ortega',documento:1245673, eps:'Sanitas'},
-    {id:14,nombre:'Daniel14 Vallejo Ortega',documento:1245672, eps:'Sanitas'},
-    {id:15,nombre:'Daniel15 Vallejo Ortega',documento:1245671, eps:'Sanitas'},
-]
+
 const columnasControl=[
     {
         title:'Fecha',
@@ -221,10 +209,40 @@ const datosControl=[
 ]
 function Table({control}) {
     const history = useHistory()
+    const { bacLog } = useContext(BacContext);
+
+    const [datosPacientes,setDatosPacientes]=useState(undefined)
+    async function borrar(documento,nuevadata){
+        fetch(`${configData.SERVER_URL}/pacientes/${documento}`,{method:'DELETE'})
+                .then((response) => response.json())
+                .then((data) => {
+                        if(data["message"]){
+                            setDatosPacientes(nuevadata)
+                            alert(data["message"])
+                        }else{
+                            alert("algo raro pasó")
+                        }
+                        
+                    }
+                                        )
+    }
+    useEffect(() => {
+
+          fetch(`${configData.SERVER_URL}/pacientes`)
+            .then((response) => response.json())
+            .then((data) => {
+                    
+                    console.log(data)
+                    setDatosPacientes(data)
+                }
+            );
+        }
+      , []);
+     if (!datosPacientes) return null 
     return (
         <div className="table-container">
             <div className="top-table pb-3" >
-                <BackButton route="/main"></BackButton>
+                <BackButton route={`/main/${bacLog.ID}`}></BackButton>
                 <div style={{width:'80%',textAlign:'center',display:'flex',flexDirection:"column",justifyContent:'center',alignItems:'center'}}>
                 <h2 style={{color:'rgb(50 48 48 / 87%)',fontWeight:'700'}}>Sistema LIS</h2>
                 </div>
@@ -246,7 +264,7 @@ function Table({control}) {
                             icon: 'add',
                             tooltip:'Mira información estadística del control de calidad para esta fecha',
                             onClick:(event,rowData)=>  {
-                                
+                               
                                 history.push("/estadisticaspordia/1")
                             
                             }
@@ -293,22 +311,26 @@ function Table({control}) {
                         {
                             icon: 'add',
                             tooltip:'Agrega una cita el paciente',
-                            onClick:(event,rowData)=>{history.push("/cita/1")}
+                            onClick:(event,rowData)=>{
+                                console.log(rowData.documento)
+                                history.push(`/cita/${rowData.documento}`)
+                                }
                         },
-                        {
-                            icon: 'edit',
-                            tooltip:'edita los datos del paciente',
-                            onClick:(event,rowData)=>alert("editar: "+rowData.nombre)
-                        },
+
                         {
                             icon: 'search',
                             tooltip:'Ver más información del paciente',
-                            onClick:(event,rowData)=>{ history.push("/resultspatient/1")}
+                            onClick:(event,rowData)=>{ history.push(`/resultspatient/${rowData.documento}`)}
                         },
                         {
                             icon: 'delete',
                             tooltip:'Eliminar paciente del sistema',
-                            onClick:(event,rowData)=>window.confirm("eliminar paciente del sistema")
+                            onClick: (event,rowData)=>{
+                                
+                                        //borrar(rowData.documento)
+                                        const nuevadata=datosPacientes.filter(fila=> fila.documento!==rowData.documento)
+                                        borrar(rowData.documento,nuevadata)
+                                        }
                         },
                     ]
                 }

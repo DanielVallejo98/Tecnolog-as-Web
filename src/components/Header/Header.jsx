@@ -15,8 +15,8 @@ function Header({loggedOut}) {
             <Nav.Link href="/nuevopaciente">Ingresar nuevo paciente</Nav.Link>
             <Nav.Link href="/pacientes">Ver pacientes</Nav.Link>
 
-            <Nav.Link href="/nuevocontrolcalidad" >Realiza CC</Nav.Link>
-            <Nav.Link href="/controlcalidad" >Consulta CC</Nav.Link>
+            {/* <Nav.Link href="/nuevocontrolcalidad" >Realiza CC</Nav.Link>
+            <Nav.Link href="/controlcalidad" >Consulta CC</Nav.Link> */}
             </Nav>
             <Form className="d-flex" onSubmit={loggedOut}>
             

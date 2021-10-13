@@ -62,7 +62,7 @@ function App() {
           </Route>  
         </Switch>
         <Switch >
-          <GuardBac path="/main" component={Main} isLoggedIn={bacLog.isLoggedIn} /> 
+          <GuardBac path="/main/:id" component={Main} isLoggedIn={bacLog.isLoggedIn} /> 
         </Switch>
         <Switch >
           <GuardTable path="/pacientes" component={Table} isLoggedIn={bacLog.isLoggedIn} control={!control}/> 
@@ -81,10 +81,10 @@ function App() {
           <GuardBac path="/estadisticaspordia/:fecha" component={Statistics} isLoggedIn={bacLog.isLoggedIn} control={control}/> 
         </Switch>
         <Switch >
-          <GuardBac path="/resultspatient/:id" component={BacResults} isLoggedIn={bacLog.isLoggedIn} /> 
+          <GuardBac path="/resultspatient/:documento" component={BacResults} isLoggedIn={bacLog.isLoggedIn} /> 
         </Switch>
         <Switch >
-          <GuardBac path="/cita/:id" component={Appointment} isLoggedIn={bacLog.isLoggedIn} /> 
+          <GuardBac path="/cita/:documento" component={Appointment} isLoggedIn={bacLog.isLoggedIn} /> 
         </Switch>
       </BacContext.Provider> 
            
