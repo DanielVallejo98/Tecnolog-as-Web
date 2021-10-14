@@ -41,17 +41,21 @@ function FormPatient() {
         fetch(`${configData.SERVER_URL}/crearpaciente`,opts)
             .then((response) => response.json())
             .then((data) => {
-            
+            if(data["message"]==="Nuevo paciente guardado!"){
                 alert(data["message"])
- 
+                history.push(`/main/${bacLog.ID}`)
+            }else{
+                alert(data["message"])
+            }
             }
                 );
       };
 
   const handleSubmit = async (event)  => {
     const form = event.currentTarget;
+    event.preventDefault();
     if (form.checkValidity() === false) {
-      event.preventDefault();
+      
       event.stopPropagation();
       
     }
